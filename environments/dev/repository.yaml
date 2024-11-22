@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: internal-http-repo
+  namespace: argo-cd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  url: "http://gitea.gitea/gtf/infra"
+  username: "bn_user"
+  password: "1f886e8af964902155f5b59dadc99f131fc91fd2"
+  insecure: "true"
+  forceHttpBasicAuth: "true"
+  enableLfs: "true"
+  type: "git"
