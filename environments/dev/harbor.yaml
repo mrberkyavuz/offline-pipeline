@@ -1,0 +1,15 @@
+expose:
+  type: loadBalancer
+  loadBalancer:
+    ports:
+      httpsPort: 8443
+  tls:
+    enabled: true
+    auto:
+      commonName: localhost
+externalURL: https://localhost:8443
+persistence.persistentVolumeClaim.registry.storageClass: hostpath
+persistence.persistentVolumeClaim.jobservice.jobLog.storageClass: hostpath
+persistence.persistentVolumeClaim.database.storageClass: hostpath
+persistence.persistentVolumeClaim.redis.storageClass: hostpath
+persistence.persistentVolumeClaim.trivy.storageClass: hostpath

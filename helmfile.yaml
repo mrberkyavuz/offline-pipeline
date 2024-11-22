@@ -1,0 +1,57 @@
+helmDefaults:
+  kubeContext: {{ requiredEnv "KUBE_CONTEXT" }}
+repositories:
+- name: bitnami
+  url: https://charts.bitnami.com/bitnami
+- name: argo
+  url: https://argoproj.github.io/argo-helm
+- name: harbor
+  url: https://helm.goharbor.io
+- name: metrics-server
+  url: https://kubernetes-sigs.github.io/metrics-server
+releases:
+- name: gitea
+  namespace: gitea
+  createNamespace: true
+  chart: bitnami/gitea
+  version: 3.0.2
+  values:
+  - environments/{{ requiredEnv "DEPLOY_ENV" }}/gitea.yaml
+  - adminPassword: {{ requiredEnv "GITEA_ADMIN_PASSWORD" }}
+    global:
+      postgresql:
+        auth:
+          password: {{ requiredEnv "GITEA_POSTGRESQL_ADMIN_PASSWORD" }}
+- name: harbor
+  namespace: harbor
+  createNamespace: true
+  chart: harbor/harbor
+  version: 1.15.1
+  values:
+  - environments/{{ requiredEnv "DEPLOY_ENV" }}/harbor.yaml
+  - harborAdminPassword: {{ requiredEnv "HARBOR_ADMIN_PASSWORD" }}
+- name: argo-cd
+  namespace: argo-cd
+  createNamespace: true
+  chart: argo/argo-cd
+  version: 7.7.5
+  values:
+  - environments/{{ requiredEnv "DEPLOY_ENV" }}/argo-cd.yaml
+- name: argocd-image-updater
+  namespace: argo-cd
+  createNamespace: true
+  chart: argo/argocd-image-updater
+  version: 0.11.2
+  values:
+  - environments/{{ requiredEnv "DEPLOY_ENV" }}/argocd-image-updater.yaml
+  - extraEnv:
+    - name: REGISTRY_SECRET
+      value: "admin:{{ requiredEnv "HARBOR_ADMIN_PASSWORD" }}"
+- name: metrics-server
+  namespace: metrics-server
+  createNamespace: true
+  chart: metrics-server/metrics-server
+  version: 3.12.2
+  values:
+  - environments/{{ requiredEnv "DEPLOY_ENV" }}/metrics-server.yaml
+

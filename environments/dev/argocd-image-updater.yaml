@@ -1,0 +1,10 @@
+config:
+  argocd:
+    insecure: true
+  registries:
+  - name: Harbor Local
+    prefix: localhost:8443
+    api_url: https://localhost:8443
+    credentials: env:REGISTRY_SECRET
+    defaultns: library
+    default: true
