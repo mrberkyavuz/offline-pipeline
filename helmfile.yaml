@@ -10,6 +10,12 @@ repositories:
 - name: metrics-server
   url: https://kubernetes-sigs.github.io/metrics-server
 releases:
+- name: hello
+  namespace: platform
+  createNamespace: true
+  chart: charts/hello
+  values:
+  - environments/{{ requiredEnv "DEPLOY_ENV" }}/hello.yaml
 - name: gitea
   namespace: gitea
   createNamespace: true

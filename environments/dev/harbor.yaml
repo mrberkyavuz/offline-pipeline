@@ -6,8 +6,8 @@ expose:
   tls:
     enabled: true
     auto:
-      commonName: localhost
-externalURL: https://localhost:8443
+      commonName: harbor.payantis.local
+externalURL: https://harbor.payantis.local:8443
 persistence.persistentVolumeClaim.registry.storageClass: hostpath
 persistence.persistentVolumeClaim.jobservice.jobLog.storageClass: hostpath
 persistence.persistentVolumeClaim.database.storageClass: hostpath
