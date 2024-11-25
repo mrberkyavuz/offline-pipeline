@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello
+  namespace: argo-cd
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: hello=harbor.payantis.local:8443/library/hello
+    argocd-image-updater.argoproj.io/hello.update-strategy: newest-build
+    argocd-image-updater.argoproj.io/write-back-method: git
+spec:
+  destination:
+    name: ''
+    namespace: platform
+    server: https://kubernetes.default.svc
+  source:
+    path: charts/hello
+    repoURL: http://gitea.gitea/gtf/infra
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - ../../environments/dev/hello.yaml
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
