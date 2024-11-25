@@ -5,7 +5,7 @@ metadata:
   namespace: argo-cd
   annotations:
     argocd-image-updater.argoproj.io/image-list: hello=harbor.payantis.local:8443/library/hello
-    argocd-image-updater.argoproj.io/hello.update-strategy: alphabetical
+    argocd-image-updater.argoproj.io/hello.update-strategy: newest-build
     argocd-image-updater.argoproj.io/write-back-method: git
 spec:
   destination:

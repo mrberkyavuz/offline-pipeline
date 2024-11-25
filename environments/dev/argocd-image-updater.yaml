@@ -9,3 +9,5 @@ config:
     defaultns: library
     default: true
     insecure: true
+extraArgs:
+- "--interval=10s"
