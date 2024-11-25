@@ -28,14 +28,14 @@ releases:
       postgresql:
         auth:
           password: {{ requiredEnv "GITEA_POSTGRESQL_ADMIN_PASSWORD" }}
-- name: harbor
-  namespace: harbor
-  createNamespace: true
-  chart: harbor/harbor
-  version: 1.15.1
-  values:
-  - environments/{{ requiredEnv "DEPLOY_ENV" }}/harbor.yaml
-  - harborAdminPassword: {{ requiredEnv "HARBOR_ADMIN_PASSWORD" }}
+# - name: harbor
+#   namespace: harbor
+#   createNamespace: true
+#   chart: harbor/harbor
+#   version: 1.15.1
+#   values:
+#   - environments/{{ requiredEnv "DEPLOY_ENV" }}/harbor.yaml
+#   - harborAdminPassword: {{ requiredEnv "HARBOR_ADMIN_PASSWORD" }}
 - name: argo-cd
   namespace: argo-cd
   createNamespace: true
